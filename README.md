@@ -1,4 +1,5 @@
 # ExCopter
+> Elixir client for the Parrot AR 2.0 Quadcopter
 
 ### Roadmap
 - Improve docs
