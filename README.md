@@ -6,7 +6,7 @@
 - Add Pid based client to support multiple drone connections
 - Add NavData support for streaming copter data
 
-The Client API is still in flux regarding scripting drone commands, ie `for` syntax. Ideas are welcome on the issue tracker.
+The Client API is still in flux regarding scripting client commands, ie `for` syntax. Ideas are welcome on the issue tracker.
 
 ## Usage
 ```elixir
