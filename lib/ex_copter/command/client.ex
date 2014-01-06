@@ -57,16 +57,21 @@ defmodule ExCopter.Command.Client do
   end
 
   def for(milliseconds, func) do
-    pid = spawn fn -> do_repeat(func) end
+    client = self
+    pid = spawn fn -> do_repeat(client, func) end
     {:ok, timer} = :timer.send_interval(30, pid, :tick)
-    :timer.sleep(milliseconds)
+    :timer.send_after milliseconds, pid, :stop
+    receive do
+      :stop -> :ok
+    end
     {:ok, :cancel} = :timer.cancel(timer)
   end
 
-  def do_repeat(func) do
+  def do_repeat(client, func) do
     receive do
+      :stop -> client <- :stop
       :tick -> func.()
     end
-    do_repeat func
+    do_repeat client, func
   end
 end
